@@ -7,31 +7,27 @@
 //
 
 #import "DetailViewController.h"
+#import "Photo.h"
+
 
 @interface DetailViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewDvc;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabelDvc;
 
 @end
 
 @implementation DetailViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  [super viewDidLoad];
+  // Do any additional setup after loading the view.
+  self.titleLabelDvc.text = self.photo.urlTitle;
+  self.imageViewDvc.image = self.photo.catImage;
+  
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)dealloc {
+  
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

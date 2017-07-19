@@ -10,14 +10,9 @@
 @import UIKit;
 
 @interface Photo : NSObject
-@property (nonatomic, strong) NSString *urlServer;
-@property (nonatomic, strong) NSString *urlFarm;
-@property (nonatomic, strong) NSString *urlID;
-@property (nonatomic, strong) NSString *urlSecret;
 @property (nonatomic, strong) NSString *urlTitle;
 @property (nonatomic, strong) UIImage *catImage;
-
-
 - (instancetype)initWithInfo:(NSDictionary *)info;
-- (NSURL *)url;
+@property (nonatomic) NSURL *url;
+@property (nonatomic)int counter;
 @end

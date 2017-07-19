@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Photo;
 
 @interface CatViewCell : UICollectionViewCell
+@property (nonatomic) Photo *photo;
+
+
 
 @end

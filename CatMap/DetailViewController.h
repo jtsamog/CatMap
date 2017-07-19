@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class Photo;
+
 @interface DetailViewController : UIViewController
+@property (nonatomic, strong) Photo *photo;
 
 @end
