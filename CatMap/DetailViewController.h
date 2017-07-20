@@ -11,6 +11,6 @@
 @class Photo;
 
 @interface DetailViewController : UIViewController
-@property (nonatomic, strong) Photo *photo;
+@property (nonatomic) Photo *photo;
 
 @end

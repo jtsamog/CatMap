@@ -11,7 +11,6 @@
 @interface Photo()
 @property (nonatomic, strong) NSString *urlServer;
 @property (nonatomic, strong) NSString *urlFarm;
-@property (nonatomic, strong) NSString *urlID;
 @property (nonatomic, strong) NSString *urlSecret;
 @end
 
@@ -34,5 +33,19 @@
 - (NSURL *)creatURL {
   return [NSURL URLWithString:[NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg", self.urlFarm, self.urlServer, self.urlID, self.urlSecret]];
   
+}
+
+
++ (NSArray *)makePhotoArray:(NSArray *)aPhotoArray{
+  NSMutableArray *array = [[NSMutableArray alloc] init];
+  
+  for (NSDictionary *information in aPhotoArray) {
+    
+    Photo *photo = [[Photo alloc] initWithInfo:information];
+    [array addObject:photo];
+    
+  }
+  
+  return array;
 }
 @end

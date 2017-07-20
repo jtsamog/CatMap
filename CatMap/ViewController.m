@@ -11,6 +11,8 @@
 #import "CatViewCell.h"
 #import "DetailViewController.h"
 #import "ApiKeys.h"
+#import "APIManager.h"
+#import "LocationManager.h"
 
 @interface ViewController ()<UICollectionViewDataSource>
 
@@ -26,13 +28,24 @@
   self.collectionView.dataSource = self;
   [self createDataFromFlickrAPI];
   
+  self.catPhotos = @[];
+  
+  
+//  [APIManager getPhotos:@"Cat" andLatitude:self.photo.coordinate.latitude andLongitude:self.photo.coordinate.longitude withBlock:^(NSArray *photosArray) {
+//    self.catPhotos = photosArray;
+//  }];
+  
+  
 }
 - (void)createDataFromFlickrAPI {
   
   self.catPhotos = @[];
   
   // 1. Create a new NSURL object from the url string.
-  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&nojsoncallback=1&api_key=%@&tags=cat",FLICKR_APIKEY]];
+
+ 
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&tags=cat&has_geo=1&lat=%f&lon=%f&extras=url_m&format=json&nojsoncallback=1", FLICKR_APIKEY, self.photo.coordinate.latitude, self.photo.coordinate.longitude]];
+  
   
   NSURLRequest *urlRequest = [[NSURLRequest alloc]initWithURL:url];
   
@@ -55,7 +68,9 @@
     }
     
     NSMutableArray *tempCatPhotos = [@[] mutableCopy];
-    NSArray *json = jsonData[@"photos"][@"photo"];
+//    NSArray *json = jsonData[@"photos"][@"photo"];
+    NSArray *json = [jsonData valueForKeyPath:@"photos.photo"];
+
     NSLog(@"%@", json);
     int counter = 0;
     for (NSDictionary *info in json) { //using fast enumeration
@@ -97,6 +112,7 @@
     photo.catImage = [UIImage imageWithData:imgData]; //set image ppty on photo object to downloaded image, then use it to set the cell outlet
   }
   cell.photo = photo;
+  
   return cell;
 }
 

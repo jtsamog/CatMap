@@ -91,24 +91,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DMP-FY-kdB">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="538"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DMP-FY-kdB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="309"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="538" id="2ld-BB-bQg"/>
+                                    <constraint firstAttribute="height" constant="309" id="2ld-BB-bQg"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mNT-4m-Cjw">
-                                <rect key="frame" x="0.0" y="558" width="375" height="29"/>
+                                <rect key="frame" x="0.0" y="196" width="375" height="29"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9x1-ts-NH3">
+                                <rect key="frame" x="0.0" y="309" width="375" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2Z-Au-f0g">
+                                <rect key="frame" x="0.0" y="331.5" width="375" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gcy-uK-pmr">
+                                <rect key="frame" x="0.0" y="352" width="375" height="315"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="315" id="cHZ-8s-rjk"/>
+                                </constraints>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="B1R-S9-R3c" firstAttribute="top" secondItem="gcy-uK-pmr" secondAttribute="bottom" id="0xo-qg-PP4"/>
+                            <constraint firstAttribute="trailing" secondItem="9x1-ts-NH3" secondAttribute="trailing" id="3WV-oM-Cqf"/>
+                            <constraint firstItem="d2Z-Au-f0g" firstAttribute="top" secondItem="9x1-ts-NH3" secondAttribute="bottom" constant="2" id="6YU-uj-JEL"/>
+                            <constraint firstAttribute="trailing" secondItem="d2Z-Au-f0g" secondAttribute="trailing" id="AB8-k0-0s2"/>
                             <constraint firstItem="mNT-4m-Cjw" firstAttribute="leading" secondItem="idL-zp-vkL" secondAttribute="leading" id="EVy-gv-FAo"/>
-                            <constraint firstItem="mNT-4m-Cjw" firstAttribute="top" secondItem="DMP-FY-kdB" secondAttribute="bottom" constant="20" id="Fgb-5v-pvV"/>
+                            <constraint firstItem="mNT-4m-Cjw" firstAttribute="top" secondItem="Wkj-NI-38A" secondAttribute="bottom" constant="132" id="EmF-Gv-qAP"/>
+                            <constraint firstItem="9x1-ts-NH3" firstAttribute="leading" secondItem="idL-zp-vkL" secondAttribute="leading" id="FAN-eG-L9H"/>
                             <constraint firstAttribute="trailing" secondItem="mNT-4m-Cjw" secondAttribute="trailing" id="HHh-Y2-KR0"/>
+                            <constraint firstItem="9x1-ts-NH3" firstAttribute="top" secondItem="DMP-FY-kdB" secondAttribute="bottom" id="IgX-bH-ppu"/>
+                            <constraint firstItem="gcy-uK-pmr" firstAttribute="leading" secondItem="idL-zp-vkL" secondAttribute="leading" id="JkI-gW-70Q"/>
+                            <constraint firstAttribute="trailing" secondItem="gcy-uK-pmr" secondAttribute="trailing" id="Wqi-4W-lsq"/>
+                            <constraint firstItem="d2Z-Au-f0g" firstAttribute="leading" secondItem="idL-zp-vkL" secondAttribute="leading" id="Zc4-hs-JGD"/>
                             <constraint firstAttribute="trailing" secondItem="DMP-FY-kdB" secondAttribute="trailing" id="meE-20-yG4"/>
                             <constraint firstItem="DMP-FY-kdB" firstAttribute="leading" secondItem="idL-zp-vkL" secondAttribute="leading" id="n6K-Ko-Jrn"/>
                             <constraint firstItem="DMP-FY-kdB" firstAttribute="top" secondItem="idL-zp-vkL" secondAttribute="top" id="wKC-DO-976"/>
@@ -116,6 +143,9 @@
                     </view>
                     <connections>
                         <outlet property="imageViewDvc" destination="DMP-FY-kdB" id="rrL-YU-H3n"/>
+                        <outlet property="latitudeLabel" destination="d2Z-Au-f0g" id="ail-Ye-Jyb"/>
+                        <outlet property="longitudeLabel" destination="9x1-ts-NH3" id="CiX-Pc-6gh"/>
+                        <outlet property="photoLocationMap" destination="gcy-uK-pmr" id="KeE-Sj-dAw"/>
                         <outlet property="titleLabelDvc" destination="mNT-4m-Cjw" id="OVc-4t-Rhq"/>
                     </connections>
                 </viewController>
@@ -139,7 +169,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5v7-DV-uNj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-258.39999999999998" y="133.5832083958021"/>
+            <point key="canvasLocation" x="-708" y="62"/>
         </scene>
     </scenes>
 </document>

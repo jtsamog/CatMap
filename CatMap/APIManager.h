@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+@import UIKit;
 
 @interface APIManager : NSObject
 
++ (void)getPhotos:(NSString *)taggedItems andLatitude:(double)photoLatitude andLongitude:(double)photoLongitude withBlock:(void (^)(NSArray *))completion;
+
++ (void)downloadPhotos:(NSURL *)url completion:(void (^)(UIImage * image))completion;
 @end

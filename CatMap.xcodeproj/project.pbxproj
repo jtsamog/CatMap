@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		307141181F1F0536002409A3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 307141171F1F0536002409A3 /* MapKit.framework */; };
+		3071411B1F1F094C002409A3 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3071411A1F1F094C002409A3 /* LocationManager.m */; };
 		30AC73BB1F1EB3AF00203662 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 30AC73BA1F1EB3AF00203662 /* main.m */; };
 		30AC73BE1F1EB3AF00203662 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 30AC73BD1F1EB3AF00203662 /* AppDelegate.m */; };
 		30AC73C11F1EB3AF00203662 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30AC73C01F1EB3AF00203662 /* ViewController.m */; };
@@ -20,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		307141171F1F0536002409A3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		307141191F1F094C002409A3 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		3071411A1F1F094C002409A3 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		30AC73B61F1EB3AF00203662 /* CatMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30AC73BA1F1EB3AF00203662 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		30AC73BC1F1EB3AF00203662 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -46,17 +51,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				307141181F1F0536002409A3 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		307141161F1F0535002409A3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				307141171F1F0536002409A3 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		30AC73AD1F1EB3AF00203662 = {
 			isa = PBXGroup;
 			children = (
 				30AC73B81F1EB3AF00203662 /* CatMap */,
 				30AC73B71F1EB3AF00203662 /* Products */,
+				307141161F1F0535002409A3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,6 +115,8 @@
 				30AC73D51F1EB4A500203662 /* ApiKeys.h */,
 				30AC73DC1F1EB5FD00203662 /* APIManager.h */,
 				30AC73DD1F1EB5FD00203662 /* APIManager.m */,
+				307141191F1F094C002409A3 /* LocationManager.h */,
+				3071411A1F1F094C002409A3 /* LocationManager.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -189,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3071411B1F1F094C002409A3 /* LocationManager.m in Sources */,
 				30AC73D81F1EB57100203662 /* DetailViewController.m in Sources */,
 				30AC73D41F1EB45A00203662 /* Photo.m in Sources */,
 				30AC73C11F1EB3AF00203662 /* ViewController.m in Sources */,
@@ -356,6 +374,7 @@
 				30AC73CF1F1EB3AF00203662 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
