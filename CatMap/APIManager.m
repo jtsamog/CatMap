@@ -12,69 +12,59 @@
 
 @implementation APIManager
 
-+ (void)getPhotos:(NSString *)taggedItems andLatitude:(double)photoLatitude andLongitude:(double)photoLongitude withBlock:(void (^)(NSArray *))completion{
++ (void)createPhotoFromFlickrAPI:(NSString *)tags withBlock:(void (^)(NSArray *tempCatPhotos))completion {
   
-  NSString *urlString = [[NSString alloc] init];
+  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&nojsoncallback=1&api_key=%@&tags=%@&has_geo=1&extras=url_m", FLICKR_APIKEY, tags]];
   
-  if (photoLatitude == 0 && photoLongitude == 0) {
+  
+  NSURLRequest *urlRequest = [[NSURLRequest alloc]initWithURL:url];
+  
+  NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+  
+  NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+  
+  NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
     
-    urlString = [NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&tags=%@&has_geo=1&extras=url_m&format=json&nojsoncallback=1",
-                 FLICKR_APIKEY, taggedItems];
-  }else{
-    urlString = [NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&tags=%@&has_geo=1&lat=%f&lon=%f&extras=url_m&format=json&nojsoncallback=1", FLICKR_APIKEY, taggedItems, photoLatitude, photoLongitude];
+    if (error) {
+      NSLog(@"error: %@", error.localizedDescription);
+      return ;
+    }
+    NSError *jsonError = nil;
+    NSDictionary *jsonData = [ NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
     
-  }
-  
-  NSURL *aURL = [NSURL URLWithString:urlString];
-  
-  
-  NSURLRequest *requestURL = [NSURLRequest requestWithURL:aURL];
-  
-  NSURLSessionConfiguration *configure = [NSURLSessionConfiguration defaultSessionConfiguration];
-  NSURLSession *configureSession = [NSURLSession sessionWithConfiguration:configure];
-  
-  NSURLSessionDataTask *dataTask = [configureSession
-                                    dataTaskWithRequest:requestURL
-                                    completionHandler:^
-                                    (NSData * _Nullable data,
-                                     NSURLResponse * _Nullable response,
-                                     NSError * _Nullable error) {
-                                      
-                                      if (error) {
-                                        
-                                        NSLog(@"error: %@", error.localizedDescription);
-                                        return;
-                                        
-                                      }
-                                      
-                                      NSError *jsonError = nil;
-                                      
-                                      NSDictionary *getThatJSON = [NSJSONSerialization
-                                                                   JSONObjectWithData:data
-                                                                   options:0
-                                                                   error:&jsonError];
-                                      
-                                      if (jsonError) {
-                                        
-                                        NSLog(@"error: %@", jsonError.localizedDescription);
-                                        return;
-                                        
-                                      }
-                                      
-                                      NSArray *pictures = getThatJSON[@"photos"][@"photo"];
-                                      
-                                      NSArray *photosArray = [Photo makePhotoArray:pictures];
-                                      
-                                      [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                                        completion(photosArray);
-                                      }];
-                                      
-                                      
-                                    }];
-  
-  
+    if (jsonError) {
+      NSLog(@"jsonError: %@", jsonError.localizedDescription);
+      return;
+    }
+    
+    NSMutableArray *tempCatPhotos = [@[] mutableCopy];
+    //    NSArray *json = jsonData[@"photos"][@"photo"];
+    NSArray *json = [jsonData valueForKeyPath:@"photos.photo"];
+    
+    NSLog(@"%@", json);
+    int counter = 0;
+    for (NSDictionary *info in json) { //using fast enumeration
+      Photo *photo = [[Photo alloc] initWithInfo:info]; //fetch the photos from url
+      photo.counter = counter;
+      counter += 1;
+      [tempCatPhotos addObject:photo]; //add photo to temp array
+    }
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+      
+      completion(tempCatPhotos);
+    }];
+//    dispatch_queue_t mainQ = dispatch_get_main_queue();
+//    dispatch_async(mainQ, ^{
+//      self.catPhotos = [tempCatPhotos copy];
+//      [self.collectionView reloadData];
+   
+
+  }];
+
   [dataTask resume];
+  
 }
+
 
 + (void)downloadPhotos:(NSURL *)url completion:(void (^)(UIImage * image))completion{
   

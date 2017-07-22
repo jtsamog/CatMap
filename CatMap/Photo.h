@@ -21,7 +21,5 @@
 - (instancetype)initWithInfo:(NSDictionary *)info;
 
 
-+ (NSArray *)makePhotoArray:(NSArray *)aPhotoArray;
- 
 
 @end

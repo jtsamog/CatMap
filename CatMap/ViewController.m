@@ -26,72 +26,15 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.collectionView.dataSource = self;
-  [self createDataFromFlickrAPI];
   
   self.catPhotos = @[];
   
-  
-//  [APIManager getPhotos:@"Cat" andLatitude:self.photo.coordinate.latitude andLongitude:self.photo.coordinate.longitude withBlock:^(NSArray *photosArray) {
-//    self.catPhotos = photosArray;
-//  }];
-  
-  
-}
-- (void)createDataFromFlickrAPI {
-  
-  self.catPhotos = @[];
-  
-  // 1. Create a new NSURL object from the url string.
-
- 
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&tags=cat&has_geo=1&lat=%f&lon=%f&extras=url_m&format=json&nojsoncallback=1", FLICKR_APIKEY, self.photo.coordinate.latitude, self.photo.coordinate.longitude]];
-  
-  
-  NSURLRequest *urlRequest = [[NSURLRequest alloc]initWithURL:url];
-  
-  NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-  
-  NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-  
-  NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-    
-    if (error) {
-      NSLog(@"error: %@", error.localizedDescription);
-      return ;
-    }
-    NSError *jsonError = nil;
-    NSDictionary *jsonData = [ NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
-    
-    if (jsonError) {
-      NSLog(@"jsonError: %@", jsonError.localizedDescription);
-      return;
-    }
-    
-    NSMutableArray *tempCatPhotos = [@[] mutableCopy];
-//    NSArray *json = jsonData[@"photos"][@"photo"];
-    NSArray *json = [jsonData valueForKeyPath:@"photos.photo"];
-
-    NSLog(@"%@", json);
-    int counter = 0;
-    for (NSDictionary *info in json) { //using fast enumeration
-      Photo *photo = [[Photo alloc] initWithInfo:info]; //fetch the photos from url
-      photo.counter = counter;
-      counter += 1;
-      [tempCatPhotos addObject:photo]; //add photo to temp array
-    }
-    
-    dispatch_queue_t mainQ = dispatch_get_main_queue();
-    dispatch_async(mainQ, ^{
-      self.catPhotos = [tempCatPhotos copy];
-      [self.collectionView reloadData];
-    });
-    
+  [APIManager createPhotoFromFlickrAPI:@"Cat" withBlock:^(NSArray *tempCatPhotos) {
+    self.catPhotos = [NSArray arrayWithArray:tempCatPhotos];
+    [self.collectionView reloadData];
   }];
   
-  //6. A task is created in a suspended state, so we need to resume it
-  [dataTask resume];
 }
-
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
   return 1;

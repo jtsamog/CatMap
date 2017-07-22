@@ -35,8 +35,8 @@
   
   self.navigationItem.title = self.photo.urlTitle;
   
-  [LocationManager getPictureLocationData:self.photo completion:^(CLLocationCoordinate2D coordinate) {
-    self.photo.coordinate = coordinate;
+  [LocationManager getPictureLocationData:self.photo completion:^(CLLocationCoordinate2D catLocation) {
+    self.photo.coordinate = catLocation;
     self.latitudeLabel.text = [NSString stringWithFormat:@"Latitude: %f", self.photo.coordinate.latitude];
     self.longitudeLabel.text = [NSString stringWithFormat:@"Longitude: %f", self.photo.coordinate.longitude];
     

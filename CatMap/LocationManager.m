@@ -11,7 +11,7 @@
 
 @implementation LocationManager
 
-+ (void)getPictureLocationData:(Photo*)picture completion:(void (^)(CLLocationCoordinate2D))completion
++ (void)getPictureLocationData:(Photo*)picture completion:(void (^)(CLLocationCoordinate2D catLocation))completion
 {
   
   NSString *urlString = [NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=%@&photo_id=%@&format=json&nojsoncallback=1",FLICKR_APIKEY,picture.urlID];

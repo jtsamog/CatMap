@@ -36,16 +36,4 @@
 }
 
 
-+ (NSArray *)makePhotoArray:(NSArray *)aPhotoArray{
-  NSMutableArray *array = [[NSMutableArray alloc] init];
-  
-  for (NSDictionary *information in aPhotoArray) {
-    
-    Photo *photo = [[Photo alloc] initWithInfo:information];
-    [array addObject:photo];
-    
-  }
-  
-  return array;
-}
 @end
